@@ -1,9 +1,7 @@
 using CSV, DataFrames
 
 function is_safe_order(a, asc)
-    first = a[1]
-    second = a[2]
-    asc ? order = second-first <= 3 && second-first > 0 : order = second-first >= -3 && second-first < 0
+    asc ? order = a[2]-a[1] <= 3 && a[2]-a[1] > 0 : order = a[2]-a[1] >= -3 && a[2]-a[1] < 0
     for x in 2:length(a)
         asc ? order = order && a[x]-a[x-1] <= 3 && a[x]-a[x-1] > 0 : order = order && a[x]-a[x-1] >= -3 && a[x]-a[x-1] < 0
     end        
