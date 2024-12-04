@@ -1,27 +1,43 @@
+function input_parse(expression, s)
+
+    total = 0
+    active = true
+
+    while length(s) > 8 
+
+        x = match(expression, s).match
+        y = collect(findfirst(x, s))
+        start = length(x)+y[1]
+        s = s[start:end]
+        if x[1:3] == "mul" && active
+            a = parse(Int64,split(x[5:end-1], ",")[1])
+            b = parse(Int64, split(x[5:end-1], ",")[2])
+            total = total + a * b
+        else
+            if x[1:4] == "do()"
+                active = true
+            elseif x[1:7] == "don't()"
+                active = false
+            end
+        end
+    
+    end
+    return total
+end
+
 # Start of main program
 
-global s = ""
+global data = ""
 
-open("data/day3b_test.txt") do f
+open("data/day3.txt") do f
    
     while ! eof(f)  
-        global s = s * readline(f)          
+        global data = data * readline(f)          
     end
 end
 
-total = 0
+expression1 = r"mul\(\d+,\d+\)"
+expression2 = r"do\(\)|don't\(\)|mul\((\d+)\s*,\s*(\d+)\)"
 
-while length(s) > 1 
-
-    x =match(r"mul\(\d+,\d+\)", s).match
-    y = collect(findfirst(x, s))
-    start = length(x)+y[1]
-    global s = s[start:end]
-    
-    a = parse(Int64,split(x[5:end-1], ",")[1])
-    b = parse(Int64, split(x[5:end-1], ",")[2])
-    global total = total + a * b
-
-end
-
-println(total)
+println(input_parse(expression1, data))
+println(input_parse(expression2, data))

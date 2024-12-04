@@ -2,7 +2,7 @@
 
 global s = ""
 
-open("data/day3b_test.txt") do f
+open("data/day3.txt") do f
    
     while ! eof(f)  
         global s = s * readline(f)          
@@ -11,7 +11,7 @@ end
 
 total = 0
 
-while length(s) > 1 
+while length(s) > 8 
 
     x =match(r"mul\(\d+,\d+\)", s).match
     y = collect(findfirst(x, s))
