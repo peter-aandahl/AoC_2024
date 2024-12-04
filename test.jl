@@ -9,17 +9,20 @@ open("data/day3b_test.txt") do f
     end
 end
 
+total = 0
+
 while length(s) > 1 
 
     x =match(r"mul\(\d+,\d+\)", s).match
     y = collect(findfirst(x, s))
     start = length(x)+y[1]
     global s = s[start:end]
-   
-    a = parse(Int64,split(s[5:end-1], ",")[1])
-    b = parse(Int64, split(s[5:end-1], ",")[2])
-    println(a, " - ", b)
+    
+    a = parse(Int64,split(x[5:end-1], ",")[1])
+    b = parse(Int64, split(x[5:end-1], ",")[2])
+    global total = total + a * b
 
 end
 
+println(total)
 
