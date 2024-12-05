@@ -1,6 +1,9 @@
+using DataFrames
+
+df = DataFrame(Column1 = String[])
+push!(df, ["Hello"])
+
+println(df)
 
 
-for m in eachmatch(r"XMAS", reverse("MMMSXXMASMXMASXXXMASXSAMXX")) 
-    println("Matched $(m.match) at index $(m.offset)") 
-end
 
