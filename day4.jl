@@ -13,22 +13,31 @@ for x in 1:size(df,1)
     end
 end
 
+println("Horizontals : ", total)
+
 # The verticals
 for y in 1:length(df.Column1[1])
     local p = ""
     for x in 1:size(df,1)
         p = p * df.Column1[x][y]
     end
+    println("Vertical P: ", p, " Reverse vertical P: ", reverse(p))
+    
     for m in eachmatch(r"XMAS", p)
         global total += 1 
     end
-    for m in eachmatch(r"XMAS", p)
+    for m in eachmatch(r"XMAS", reverse(p))
         global total += 1 
     end
 end
 
+println("plus verticals : ", total)
+
+
 # The diagonals
 
+
+# Tilt right
 df2 = DataFrame(Column1 = String[])
 local p = ""
 
@@ -39,20 +48,43 @@ for y in 1:length(df.Column1)
     push!(df2, [p])
 end    
 
-println(df2)
+for y in 1:length(df2.Column1[1])
+    local p = ""
+    for x in 1:size(df2,1)
+        p = p * df2.Column1[x][y]
+    end
+    for m in eachmatch(r"XMAS", p)
+        global total += 1 
+    end
+    for m in eachmatch(r"XMAS", reverse(p))
+        global total += 1 
+    end
+end
+
+# Tilt left
+df2 = DataFrame(Column1 = String[])
+local p = ""
+
+for y in 1:length(df.Column1)
+    p = "-"^(y-1) 
+    p = p * df[y, 1]
+    p = p * "-"^(length(df.Column1)-y)
+    push!(df2, [p])
+end    
 
 for y in 1:length(df2.Column1[1])
     local p = ""
     for x in 1:size(df2,1)
         p = p * df2.Column1[x][y]
     end
-    println(y," : ", p)
     for m in eachmatch(r"XMAS", p)
         global total += 1 
     end
-    for m in eachmatch(r"XMAS", p)
+    for m in eachmatch(r"XMAS", reverse(p))
         global total += 1 
     end
 end
 
-println(total)
+
+println("plus diagonals is total : ", total)
+
