@@ -82,3 +82,28 @@ end
 
 println(total)
 
+# Starting part 2. we still have the data in df
+
+println()
+
+global xmas = false
+global count = 0 
+#Skip edges and look for A
+for y in 2:size(df)[1]-1
+    for x in 2:length(df.Column1[1])-1
+        if cmp(string(df[y, :Column1][x]), "A") == 0 
+            global xmas = (string(df[y-1, :Column1][x-1]) * string(df[y-1, :Column1][x+1]) == "MM" && string(df[y+1, :Column1][x-1]) * string(df[y+1, :Column1][x+1]) == "SS") ||
+                          (string(df[y-1, :Column1][x-1]) * string(df[y-1, :Column1][x+1]) == "MS" && string(df[y+1, :Column1][x-1]) * string(df[y+1, :Column1][x+1]) == "MS") ||
+                          (string(df[y-1, :Column1][x-1]) * string(df[y-1, :Column1][x+1]) == "SS" && string(df[y+1, :Column1][x-1]) * string(df[y+1, :Column1][x+1]) == "MM") ||
+                          (string(df[y-1, :Column1][x-1]) * string(df[y-1, :Column1][x+1]) == "SM" && string(df[y+1, :Column1][x-1]) * string(df[y+1, :Column1][x+1]) == "SM") 
+                           
+            if xmas
+                global count += 1                
+            end
+        end
+        global xmas = false                   
+    end
+    global xmas = false
+end
+
+println(count)

@@ -7,7 +7,9 @@ push!(df, ["Line 3"])
 
 
 
-println(df[3,1])
+println(cmp("A", "B"))
+
+println(typeof("A"))
 
 
 
