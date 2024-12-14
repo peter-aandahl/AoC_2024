@@ -11,5 +11,7 @@ println(cmp("A", "B"))
 
 println(typeof("A"))
 
+println(parse(Int64, "7"))
+
 
 
